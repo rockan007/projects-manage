@@ -1,33 +1,29 @@
 <template>
     <div class="projects-container">
-        <div class="projects-header d-flex align-items-center">
-            <div class="devider-container"></div>
-            <div class="projects-detail">项目详情</div>
-            <div class="ml-auto"><span>+</span>新增项目</div>
-        </div>
+        <ContentHeader v-bind:headType="parseInt(2)" v-on:addType="getAddType"></ContentHeader>
         <div class="projects-content">
         </div>
     </div>
 </template>
 <script>
+import ContentHeader from "./Content-Header.vue";
 export default {
-    name:'projects'
-}
+  name: "projects",
+  components: {
+    ContentHeader
+  },
+  methods: {
+    getAddType: function(addType) {
+      this.$emit("addType", addType);
+    }
+  }
+};
 </script>
 <style scoped>
-    .projects-container{
-        color: white;
-        margin: 36px 60px;
-    }
-    .projects-detail{
-        font-size: 26px;
-    }
-    .devider-container{
-        width: 2px;
-        height: 40px;
-        background-color: white;
-        margin-right: 16px;
-    }
+.projects-container {
+  color: white;
+  margin: 36px 60px;
+}
 </style>
 
 
