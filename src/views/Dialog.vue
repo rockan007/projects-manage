@@ -1,8 +1,8 @@
 <template>
-    <div v-show='dialogShow' class="dialog-container" v-on:click="cancelDialog">
-        <div class="dialog-content" v-on:click.stop>
+    <div v-if='dialogShow'  class="dialog-container d-flex align-items-center justify-content-center" v-on:click="cancelDialog">
+        <div class="col-6 dialog-content d-flex flex-column" v-on:click.stop>
             <dialog-title v-bind:diaType="diaType" v-on:cancelDia="cancelDialog"></dialog-title>
-            <dialog-content v-bind:diaType="diaType"></dialog-content>
+            <dialog-content v-bind:diaType="diaType" class="flex-grow-1"></dialog-content>
         </div>
     </div>
 </template>
@@ -20,9 +20,9 @@ export default {
       default: 0,
       type: Number
     },
-    diaType:{
-        default:0,
-        type:Number
+    diaType: {
+      default: 0,
+      type: Number
     }
   },
   data: function() {
@@ -30,13 +30,19 @@ export default {
       isShow: 0
     };
   },
+  created:function(){
+    console.log("获取的dialogShow："+this.dialogShow);
+  },
   watch: {
-    dialogShow: function(newVal) {
+    dialogShow: function(newVal,oldVal) {
+      console.log("dialogShow的变化："+newVal);
+      console.log("dialog的旧值："+oldVal);
       this.isShow = newVal;
     }
   },
   methods: {
     cancelDialog: function() {
+      console.log("取消dialog");
       this.isShow = 0;
       this.$emit("cancelDia");
     }
@@ -54,15 +60,11 @@ export default {
   background-color: rgba(0, 0, 0, 0.3);
 }
 .dialog-content {
-  position: absolute;
-  top: 110px;
-  left: 120px;
-  right: 120px;
-  bottom: 120px;
   background-color: rgb(255, 255, 255, 0.9);
   box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
   z-index: 888;
   border-radius: 8px;
+  min-height: 70%;
 
   padding: 16px 32px;
 }

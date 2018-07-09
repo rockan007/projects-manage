@@ -6,6 +6,8 @@
 </template>
 <script>
 require('./assets/css/iconfont.css');
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 export default {
   
 }
@@ -42,9 +44,10 @@ export default {
   background-position: center;
   background-size: cover;
 }
-@media (min-width: 768px){
+@media (min-width: 992px){
   .container{
     max-width: 100%;
+    width: 100%;
   }
 }
 </style>

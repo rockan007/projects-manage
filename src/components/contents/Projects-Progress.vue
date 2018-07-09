@@ -1,30 +1,25 @@
 <template>
     <div class="progress-container d-flex flex-column">
         <ContentHeader v-bind:headType="parseInt(1)" v-on:addType="getAddType"></ContentHeader>
-        <div class="swiper-container flex-grow-1" style="height:100%">
-            <div class="swiper-wrapper" style="height:100px;">
-                <div class="swiper-slide" >slider1</div>
-                <div class="swiper-slide">slider2</div>
-                <div class="swiper-slide">slider3</div>
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
+        <slide-container></slide-container>
     </div>
 </template>
 <script>
 import Swiper from "swiper";
 import "swiper/dist/css/swiper.min.css";
 import ContentHeader from "./Content-Header.vue";
+import SlideContainer from '../../views/Slide-Container'
 export default {
   name: "progressive",
   components: {
-    ContentHeader
+    ContentHeader,
+    'slide-container':SlideContainer
   },
   data: function() {
     return {};
   },
   mounted: function() {
-    this.initSwiper();
+    // this.initSwiper();
   },
   methods: {
     initSwiper: function() {
