@@ -1,19 +1,17 @@
 <template>
     <div class="progress-container d-flex flex-column">
         <ContentHeader v-bind:headType="parseInt(1)" v-on:addType="getAddType"></ContentHeader>
-        <slide-container></slide-container>
+        <progresses-slide class="flex-grow-1"></progresses-slide>
     </div>
 </template>
 <script>
-import Swiper from "swiper";
-import "swiper/dist/css/swiper.min.css";
-import ContentHeader from "./Content-Header.vue";
-import SlideContainer from '../../views/Slide-Container'
+import ContentHeader from "./Content-Header";
+import ProgressesSlide from './Progresses-Slide'
 export default {
   name: "progressive",
   components: {
     ContentHeader,
-    'slide-container':SlideContainer
+    'progresses-slide':ProgressesSlide
   },
   data: function() {
     return {};
@@ -22,15 +20,6 @@ export default {
     // this.initSwiper();
   },
   methods: {
-    initSwiper: function() {
-      var mySwiper = new Swiper(".swiper-container", {
-        autoplay: true, //可选选项，自动滑动
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination"
-        }
-      });
-    },
     getAddType: function(addType) {
       this.$emit("addType", addType);
     }

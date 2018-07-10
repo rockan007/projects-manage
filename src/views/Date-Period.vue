@@ -25,12 +25,19 @@ export default {
     this.getPeriods();
   },
   watch: {
-    periodType: function(newVal, oldVal) {
+    periodType: function() {
       this.datePeriods = [];
       this.getPeriods();
+    },
+    selectPeriod: function(newVal) {
+      this.$emit("selectPeriod",this.transformPeriod(newVal));
     }
   },
   methods: {
+    transformPeriod: function(dateStr) {
+      let period = dateStr.replace(/[^0-9]/g, "-");
+      return period.slice(0, period.length-1);
+    },
     getPeriods: function() {
       if (this.periodType) {
         this.getYearPeriods(0);
@@ -56,7 +63,6 @@ export default {
         } else {
           year--;
         }
-        console.log("获取的年份：" + year);
         this.datePeriods.push(year + "年");
       }
     },
