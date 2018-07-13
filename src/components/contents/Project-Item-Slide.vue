@@ -1,7 +1,7 @@
 <template>
     <div class="carousel-item d-flex flex-wrap justify-content-center">
-        <div v-for="(project,index) in slideProject" v-bind:style='{"background-color":getRandomColor()}' 
-        class=" project-item col-2 d-flex flex-column" :key="index">
+        <div  v-for="(project,index) in slideProject" v-bind:style='{"background-color":getRandomColor()}' 
+        class=" project-item col-2 d-flex flex-column" :key="index" v-on:click="routerToDetail(project.TabIDStr)">
             <div class="project-title">
                 {{project.ProjectName}}
             </div> 
@@ -33,6 +33,14 @@ export default {
         color += ((Math.random() * 16) | 0).toString(16);
       }
       return color;
+    },
+    routerToDetail:function(id){
+        this.$router.push({
+            name:'detail',
+            params:{
+                id:id
+            }
+        });
     }
   }
 };
