@@ -19,6 +19,12 @@ export default {
     "date-period": DatePeriod,
     "plan-list": PlanList
   },
+  props: {
+    isPlanAdd: {
+      default: false,
+      type: Boolean
+    }
+  },
   data: function() {
     return {
       periodType: 0, //0周计划 1月计划 2季度计划
@@ -28,6 +34,11 @@ export default {
   },
   mounted: function() {},
   watch: {
+    isPlanAdd: function(newVal) {
+      if (newVal) {
+        this.getPlanList();
+      }
+    },
     periodType: function() {
       this.getPlanList();
     },
@@ -47,8 +58,14 @@ export default {
           PlanStatus: this.periodType
         },
         function(response) {
+          this.$emit("listPanAdd");
           console.log("获取的计划结果：" + JSON.stringify(response));
-        }
+          if (response.ResultCode == 200) {
+            this.planList = response.Data_Obj.List;
+          } else {
+            this.planList = [];
+          }
+        }.bind(this)
       );
     },
     getPeriodType: function(periodType) {
@@ -60,7 +77,7 @@ export default {
       this.$emit("addType", addType);
     },
     getSelectPeriod: function(period) {
-      console.log("获取的选择时间："+period);
+      console.log("获取的选择时间：" + period);
       this.selectPeriod = period;
     }
   }

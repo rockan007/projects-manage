@@ -1,13 +1,13 @@
 <template>
     <div class="project-detail-container d-flex ">
         <div class="project-title detail-item d-flex align-items-center" >
-                <div class="title">IT部项目管理系统</div>
+                <div class="title">{{projectDetail.ProjectName}}</div>
         </div>
         <div class="d-flex flex-column flex-grow-1">
             <div class="project-brief-info detail-item flex-grow-1" >
                 <span class="content-hint">简介：</span>
                 <div class="brief-info">
-                    本软件系统为商业用户提供了电力系统管理和维护的平台，实现了对电力系统的实时监测、线上工单的发起，及时的电费缴费提醒和在线缴费业务，以及方便和有质量保证的电路维护物料在线商城。方便了用户的用电管理，为提高生产效率、管理水平，减少用电管理成本提供了有效帮助。
+                    {{projectDetail.ProjectBrief}}
                 </div>
             </div>
             <div class="d-flex flex-row flex-grow-1">

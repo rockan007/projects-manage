@@ -6,7 +6,7 @@ export const Const = {
     PLANS: "Get_ProPlan", //项目计划
     ADD_PLAN: "Create_Plan", //添加计划
     ACCOUNT_INFO: 'account-info', //账号信息
-    PROGRESSES: 'Get_Process', //获取进程
+    PROGRESSES: 'Get_ProPlanList', //获取进程
     ADD_PROGRESS: 'Create_Process', //添加进程
     GET_DETAIL: 'Get_ProjecManageInfo',
 

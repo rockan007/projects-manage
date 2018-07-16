@@ -4,7 +4,7 @@
             <div class="form-group row">
                 <label for="planTitle" class="col-2 col-form-label" >项目名称<span class="required-sign">*</span></label>
                 <div class="col-10">
-                    <select class="form-control"  name="PMIDstr"  v-model="projectId" id="planTitle">
+                    <select class="form-control"  name="PMIDstr"  v-model="selectProjectId" id="planTitle">
                         <option v-for="(project,index) in projects" :key="index" :value="project.TabIDStr">{{project.ProjectName}}</option>
                     </select>
                 </div>
@@ -31,18 +31,26 @@ import { Const } from "../assets/js/const";
 export default {
   name: "dialogProgress",
   props: {
-    targetProject: ""
+    projectId: {
+      default: "",
+      type: String
+    }
   },
   data: function() {
     return {
       projects: [],
-      projectId: "",
+      selectProjectId: "",
       progressInfo: "",
       progressDate: ""
     };
   },
   created: function() {
     this.getProjects();
+  },
+  watch: {
+    projectId: function(newVal) {
+      this.selectProjectId = newVal;
+    }
   },
   methods: {
     getProjects: function() {
@@ -63,13 +71,17 @@ export default {
       Const.request(
         Const.ADD_PROGRESS,
         {
-          PMIDstr: this.projectId,
+          UIDstr: Const.getSessionStorage(Const.ACCOUNT_INFO).AccountID,
+          PMIDstr: this.selectProjectId,
           ProcessContent: this.progressInfo,
           ProcessTime: this.progressDate
         },
         function(response) {
           console.log("添加进程后的结果：" + JSON.stringify(response));
-        }
+          if (response.ResultCode == 200) {
+            this.$emit("progressAdded");
+          }
+        }.bind(this)
       );
     },
     submitProgress: function(event) {

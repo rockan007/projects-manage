@@ -1,8 +1,10 @@
 <template>
     <div v-if='dialogShow'  class="dialog-container d-flex align-items-center justify-content-center" v-on:click="cancelDialog">
         <div class="col-6 dialog-content d-flex flex-column" v-on:click.stop>
-            <dialog-title v-bind:diaType="diaType" v-on:cancelDia="cancelDialog"></dialog-title>
-            <dialog-content v-bind:diaType="diaType" class="flex-grow-1"></dialog-content>
+            <dialog-title  v-bind:diaType="diaType" v-on:cancelDia="cancelDialog"></dialog-title>
+            <dialog-content v-bind:diaType="diaType" v-bind:projectId="projectId" v-on:planAdded="planAdded" v-on:progressAdded="progressAdded"
+            class="flex-grow-1" v-on:cancelDia="cancelDialog">
+            </dialog-content>
         </div>
     </div>
 </template>
@@ -23,6 +25,10 @@ export default {
     diaType: {
       default: 0,
       type: Number
+    },
+    projectId: {
+      default: "",
+      type: String
     }
   },
   data: function() {
@@ -30,13 +36,13 @@ export default {
       isShow: 0
     };
   },
-  created:function(){
-    console.log("获取的dialogShow："+this.dialogShow);
+  created: function() {
+    console.log("获取的dialogShow：" + this.dialogShow);
   },
   watch: {
-    dialogShow: function(newVal,oldVal) {
-      console.log("dialogShow的变化："+newVal);
-      console.log("dialog的旧值："+oldVal);
+    dialogShow: function(newVal, oldVal) {
+      console.log("dialogShow的变化：" + newVal);
+      console.log("dialog的旧值：" + oldVal);
       this.isShow = newVal;
     }
   },
@@ -45,6 +51,13 @@ export default {
       console.log("取消dialog");
       this.isShow = 0;
       this.$emit("cancelDia");
+    },
+    planAdded: function() {
+      this.$emit("planAdded");
+    },
+    progressAdded: function() {
+      console.log("progressAdded")
+      this.$emit("progressAdded");
     }
   }
 };

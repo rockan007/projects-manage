@@ -4,7 +4,7 @@
             <li data-target="#progressesContainer" v-for="index in totalPage" :key="index-1" :data-slide-to="index-1" :class='{"active":(index-1)==activeIndex}'></li>
         </ol>
         <div class="carousel-inner flex-grow-1 d-flex">
-            <progress-item-slide v-for="(slideProgress,index) in slideProgresses" v-bind:slideProgress="slideProgress" :key="index" 
+            <progress-item-slide v-on:addProgress="getAddProgress" v-for="(slideProgress,index) in slideProgresses" v-bind:slideProgress="slideProgress" :key="index" 
             :class="{'active':index==activeIndex}"></progress-item-slide>
         </div>
         <a class="carousel-control-prev" href="#progressesContainer" role="button" data-slide="prev">
@@ -26,6 +26,12 @@ export default {
   components: {
     "progress-item-slide": ProgressItemSlide
   },
+  props: {
+    isProgressAdd: {
+      default: false,
+      type: Boolean
+    }
+  },
   data: function() {
     return {
       accountInfo: "",
@@ -43,6 +49,11 @@ export default {
     console.log("slide-container mounted");
   },
   watch: {
+    isProgressAdd: function(newVal) {
+      if (newVal) {
+        this.getProgresses();
+      }
+    },
     accountInfo: function() {
       this.getProgresses();
     },
@@ -72,9 +83,16 @@ export default {
           PageSize: 0
         },
         function(response) {
-          console.log("获取的项目进程列表数据信息：" + JSON.stringify(response));
-          this.projects = response.Data_Obj.List;
+          console.log(
+            "获取的项目进程列表数据信息：" + JSON.stringify(response)
+          );
+          if (response.ResultCode == 200) {
+            this.projects = response.Data_Obj.List;
+          } else {
+            this.projects = [];
+          }
           this.totalPage = Math.ceil(this.projects.length / 8.0);
+          this.$emit("listProgressAdd");
         }.bind(this)
       );
     },
@@ -87,6 +105,9 @@ export default {
         sProgresses.push(this.projects.slice(i * 8, (i + 1) * 8));
       }
       this.slideProgresses = sProgresses;
+    },
+    getAddProgress: function(id) {
+      this.$emit("addProgress", id);
     }
   }
 };
