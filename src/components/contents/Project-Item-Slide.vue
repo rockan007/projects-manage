@@ -1,7 +1,7 @@
 <template>
     <div class="carousel-item d-flex flex-wrap justify-content-center">
         <div  v-for="(project,index) in slideProject" v-bind:style='{"background-color":getRandomColor()}' 
-        class=" project-item col-2 d-flex flex-column" :key="index" v-on:click="routerToDetail(project.TabIDStr)">
+        class=" project-item col-2 d-flex flex-column" :key="index" v-on:click="routerToDetail(project.ID)">
             <div class="project-title">
                 {{project.ProjectName}}
             </div> 
@@ -25,6 +25,10 @@ export default {
   },
   data: function() {
     return {};
+  },
+  watch:{
+      slideProject:function(newVal){
+      }
   },
   methods: {
     getRandomColor: function() {

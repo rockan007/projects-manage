@@ -1,12 +1,13 @@
 import $ from 'jquery/dist/jquery';
 export const Const = {
+    URL:"http://139.129.240.27:8050/",
     MAIN_URL: "http://139.129.240.27:8050/CRMAPI/",
     LOGIN: "Login",
-    PROJECTS: "Get_ProjecManage", //项目列表
+    PROJECTS: "Get_PPList", //项目列表
     PLANS: "Get_ProPlan", //项目计划
     ADD_PLAN: "Create_Plan", //添加计划
     ACCOUNT_INFO: 'account-info', //账号信息
-    PROGRESSES: 'Get_ProPlanList', //获取进程
+    PROGRESSES: 'Get_PPList', //获取进程
     ADD_PROGRESS: 'Create_Process', //添加进程
     GET_DETAIL: 'Get_ProjecManageInfo',
 
@@ -21,6 +22,29 @@ export const Const = {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
+                errorCB();
+            }
+        })
+    },
+    postForm: function (url, data, successCB, errorCB = function () {}) {
+        console.log(this.MAIN_URL + url);
+        console.log(JSON.stringify(data) );
+        $.ajax({
+            type: 'POST',
+            url: this.MAIN_URL + url,
+            data: data,
+            crossDomain: true,
+            // dataType: 'jsonp',
+            // cache: false, //设置为false，上传文件不需要缓存。
+            contentType: false, //设置为false。因为是由<form>表单构造的FormData对象，且已经声明了属性enctype="multipart/form-data"，所以这里设置为false。
+            processData: false, //设置为false。因为data值是FormData对象，不需要对数据做处理。
+            // async : false,
+            success: function (response) {
+                successCB(response);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+                console.log(JSON.stringify(jqXHR))
                 errorCB();
             }
         })

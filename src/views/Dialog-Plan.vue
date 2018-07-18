@@ -1,6 +1,7 @@
 <template>
     <div class="dialog-content d-flex flex-column justify-content-center">
-        <form style="background-color:transparent" enctype="multipart/form-data" id="submitPlanForm" v-on:submit="submitPlan">
+        <form style="background-color:transparent" enctype="multipart/form-data" id="submitPlanForm" method="post" action="http://139.129.240.27:8050/CRMAPI/Create_Plan" v-on:submit="submitPlan" >
+          <!-- <input type="text" name="UIDstr" value="OTVCREZENjRCMkYzRDMxMQ"/> -->
             <div class="form-group row">
                 <label for="planTitle" class="col-2 col-form-label" >计划名称<span class="required-sign">*</span></label>
                 <div class="col-10">
@@ -13,24 +14,24 @@
                 <input type="text" class="form-control" name="PlanExplain" id="planInfo" v-model.trim="info" placeholder="计划说明">
                 </div>
             </div>
-            <fieldset class="form-group" name="PlanStatus">
+            <fieldset class="form-group" >
                 <div class="row">
                 <legend class="col-form-label col-2 pt-0">计划类型<span class="required-sign">*</span></legend>
                 <div class="col-10">
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="0" v-model="periodType" checked>
+                    <input class="form-check-input" type="radio" name="PlanStatus" id="gridRadios1" value="0" v-model="periodType" checked>
                     <label class="form-check-label" for="gridRadios1">
                         周计划
                     </label>
                     </div>
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="1" v-model="periodType">
+                    <input class="form-check-input" type="radio" name="PlanStatus" id="gridRadios2" value="1" v-model="periodType">
                     <label class="form-check-label" for="gridRadios2">
                         月度计划
                     </label>
                     </div>
                     <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="2" v-model="periodType">
+                    <input class="form-check-input" type="radio" name="PlanStatus" id="gridRadios3" value="2" v-model="periodType">
                     <label class="form-check-label" for="gridRadios3">
                         季度计划
                     </label>
@@ -56,7 +57,7 @@
                 <label class="col-2" for="extraFile">附件<span class="required-sign">*</span></label>
                 <div class="col-5">
                      <input  type="file" name="FileAddress" class="form-control-file" id="extraFile"
-                      accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
+                      accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                 </div>
                
             </div>
@@ -66,7 +67,7 @@
 </template>
 <script>
 import { Const } from "../assets/js/const";
-import $ from "jquery";
+import $ from 'jquery';
 export default {
   name: "dialogPlan",
   data: function() {
@@ -85,25 +86,31 @@ export default {
   methods: {
     submitPlan: function(event) {
       event.preventDefault();
-      Const.request(
+      let formData = new FormData(document.getElementById("submitPlanForm"));
+      formData.append(
+        "UIDstr",
+        Const.getSessionStorage(Const.ACCOUNT_INFO).AccountID
+      );
+      console.log(formData.get("UIDstr"));
+      console.log(formData.get("PlanName"))
+      // var req = new XMLHttpRequest();
+      // req.onreadystatechange=function(){
+      //     console.log(req.readyState);
+      //     console.log(req.status);
+      // }
+      // req.open(
+      //   "post",
+      //   Const.MAIN_URL+Const.ADD_PLAN,
+      //   false
+      // );
+      // req.send(formData);
+      Const.postForm(
         Const.ADD_PLAN,
-        new FormData($("#submitPlanForm")[0]).append(
-          "UIDstr",
-          Const.getSessionStorage(Const.ACCOUNT_INFO).AccountID
-        ),
-        // {
-        //     UIDstr:Const.getSessionStorage(Const.ACCOUNT_INFO).AccountID,
-        //     PlanName:this.title,
-        //     PlanExplain:this.info,
-        //     PlanStatus:this.periodType,
-        //     PlanTimeS:this.startDate,
-        //     PlanTimeE:this.endDate,
-        //     FileAddress:new FormData(document.querySelector("#extraFile").files[0])
-        // },
+        formData,
         function(response) {
           console.log("获取的添加结果：" + JSON.stringify(response));
           if (response.ResultCode == 200) {
-              this.$emit('planAdded');
+            this.$emit("planAdded");
           }
         }.bind(this)
       );

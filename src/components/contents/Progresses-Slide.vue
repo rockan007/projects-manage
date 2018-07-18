@@ -65,7 +65,8 @@ export default {
     },
     slideProgresses: {
       deep: true,
-      handler: function() {
+      handler: function(newVal) {
+        console.log("获取的项目进度：" + JSON.stringify(newVal));
         this.$nextTick(function() {
           $(".carousel").carousel();
         });
@@ -76,7 +77,7 @@ export default {
     getProgresses: function() {
       console.log("获取项目列表信息");
       Const.request(
-        Const.PROGRESSES,
+        Const.PROJECTS,
         {
           UIDstr: this.accountInfo.AccountID,
           PageIndex: 1,
@@ -87,11 +88,11 @@ export default {
             "获取的项目进程列表数据信息：" + JSON.stringify(response)
           );
           if (response.ResultCode == 200) {
-            this.projects = response.Data_Obj.List;
+            this.progresses = response.Data_Obj.List;
           } else {
-            this.projects = [];
+            this.progresses = [];
           }
-          this.totalPage = Math.ceil(this.projects.length / 8.0);
+          this.totalPage = Math.ceil(this.progresses.length / 8.0);
           this.$emit("listProgressAdd");
         }.bind(this)
       );
@@ -100,9 +101,12 @@ export default {
       this.accountInfo = Const.getSessionStorage(Const.ACCOUNT_INFO);
     },
     getSlideProgresses: function() {
+     
+      
       let sProgresses = [];
+      console.log(this.progresses.slice(0, 4));
       for (let i = 0; i < this.totalPage; i++) {
-        sProgresses.push(this.projects.slice(i * 8, (i + 1) * 8));
+        sProgresses.push(this.progresses.slice(i * 4, (i + 1) * 4));
       }
       this.slideProgresses = sProgresses;
     },

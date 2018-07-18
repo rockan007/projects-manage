@@ -40,6 +40,9 @@ export default {
       }
     },
     periodType: function() {
+      if(this.selectPeriod.split('-').length==2){
+        return;
+      }
       this.getPlanList();
     },
     selectPeriod: function() {
