@@ -14,16 +14,14 @@
                 <div class="project-persen detail-item flex-grow-1 d-flex flex-column">
                     <span class="content-hint">人员:</span>
                     <div class="persen-container flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-                        <p>负责人：安琪 电话：18906444490</p>
-                        <p>界面设计：马总 电话：1826666666</p>
-                        <p>前端：安琪 电话：17688888888</p>
-                        <p>后端：刘欣 电话：13655555555</p>
+                        <p>负责人：{{projectDetail.ProjectLeader}}</p>
+                        <p>项目成员：{{projectDetail.ProjectMember}}</p>
                     </div>
                 </div>
                 <div class="project-site detail-item flex-grow-1 d-flex flex-column">
                    <span class="content-hint">地址：</span>
                    <div class="flex-grow-1 d-flex align-items-center justify-content-center" >
-                    <img src="http://www.dianliangliang.com/img/ewm.png" alt="">
+                    <a  v-bind:style="{'backgroundImage':'url('+(Const.URL+projectDetail.ProjectPic)+')'}"  alt="" :href="Const.URL+projectDetail.ProAddress"></a>
                    </div>
                 </div>
             </div>
@@ -31,9 +29,7 @@
         <div class="project-words detail-item col-2 d-flex flex-column">
             <span class="content-hint">文档:</span>
             <div class=" d-flex flex-column">
-                <a href="#">需求文档</a>
-                <a href="#">设计文档</a>
-                <a href="#">使用手册</a>
+              <a v-for="(doc,index) in projectDetail.C " v-bind:key="index" :href="doc.Src">{{doc.FileName}}</a>
             </div>
         </div>
     </div>
@@ -41,7 +37,7 @@
 <script>
 import { Const } from "../../assets/js/const";
 export default {
-  name: "projectDeatil",
+  name: "projectDetail",
   data: function() {
     return {
       projectId: "",
@@ -59,6 +55,11 @@ export default {
         return;
       }
       this.getProjectDetail();
+    }
+  },
+  filters: {
+    filterImgUrl: function(imgsrc) {
+      return this.Const.URL + imgsrc;
     }
   },
   methods: {
@@ -85,7 +86,7 @@ export default {
 }
 .project-title {
   width: 100px;
-  background-color: rgb(40, 199, 255)
+  background-color: rgb(40, 199, 255);
 }
 .title {
   word-break: break-all;
@@ -103,21 +104,21 @@ export default {
 }
 .project-brief-info {
   font-size: 26px;
-  background-color: rgb(188, 153, 253)
+  background-color: rgb(188, 153, 253);
 }
-.project-persen{
-    background-color: rgb(255, 155, 140);
+.project-persen {
+  background-color: rgb(255, 155, 140);
 }
-.brief-info{
-    padding: 16px;
+.brief-info {
+  padding: 16px;
 }
-.persen-container{
-    font-size:24px; 
+.persen-container {
+  font-size: 24px;
 }
-.project-site{
-    background-color: rgb(254, 204, 69)
+.project-site {
+  background-color: rgb(254, 204, 69);
 }
-.project-words{
-    background-color: rgb(98, 216, 150);
+.project-words {
+  background-color: rgb(98, 216, 150);
 }
 </style>

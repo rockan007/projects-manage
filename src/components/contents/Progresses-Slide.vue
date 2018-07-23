@@ -92,7 +92,7 @@ export default {
           } else {
             this.progresses = [];
           }
-          this.totalPage = Math.ceil(this.progresses.length / 8.0);
+          this.totalPage = Math.ceil(this.progresses.length / 3.0);
           this.$emit("listProgressAdd");
         }.bind(this)
       );
@@ -106,7 +106,7 @@ export default {
       let sProgresses = [];
       console.log(this.progresses.slice(0, 4));
       for (let i = 0; i < this.totalPage; i++) {
-        sProgresses.push(this.progresses.slice(i * 4, (i + 1) * 4));
+        sProgresses.push(this.progresses.slice(i * 3, (i + 1) * 3));
       }
       this.slideProgresses = sProgresses;
     },

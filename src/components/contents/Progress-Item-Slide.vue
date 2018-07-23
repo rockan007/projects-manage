@@ -4,7 +4,7 @@
             <div class="progress-header">
                 <div class="progress-title">{{project.ProjectName}}</div>
                 <div class="progress-header-devider"></div>
-                <div v-on:click="addProjectProgress(project)">添加进度</div>
+                <div v-on:click="addProjectProgress(project)"><span class="iconfont icon-jia"></span> 添加进程</div>
             </div>
             <div class="flex-grow-1 flex-shrink-1" data-spy="scroll" style="overflow-y: scroll">
                <div v-for="(item,index) in project.C" :key="index">
