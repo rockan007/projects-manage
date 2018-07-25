@@ -20,8 +20,8 @@
                 </div>
                 <div class="project-site detail-item flex-grow-1 d-flex flex-column">
                    <span class="content-hint">地址：</span>
-                   <div class="flex-grow-1 d-flex align-items-center justify-content-center" >
-                    <a  v-bind:style="{'backgroundImage':'url('+(Const.URL+projectDetail.ProjectPic)+')'}"  alt="" :href="Const.URL+projectDetail.ProAddress"></a>
+                   <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center " >
+                    <a class="QR-code col-12 flex-grow-1"  v-bind:style="{'backgroundImage':'url('+(Const.URL+projectDetail.ProjectPic)+')'}"  alt="" :href="projectDetail.ProAddress"></a>
                    </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
         <div class="project-words detail-item col-2 d-flex flex-column">
             <span class="content-hint">文档:</span>
             <div class=" d-flex flex-column">
-              <a v-for="(doc,index) in projectDetail.C " v-bind:key="index" :href="doc.Src">{{doc.FileName}}</a>
+              <a v-for="(doc,index) in projectDetail.C " v-bind:key="index" :href="doc.Src">{{doc.FielName}}</a>
             </div>
         </div>
     </div>
@@ -120,5 +120,12 @@ export default {
 }
 .project-words {
   background-color: rgb(98, 216, 150);
+}
+.QR-code {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  margin: 30px;
 }
 </style>
