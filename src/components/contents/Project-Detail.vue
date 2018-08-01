@@ -4,11 +4,27 @@
                 <div class="title">{{projectDetail.ProjectName}}</div>
         </div>
         <div class="d-flex flex-column flex-grow-1">
-            <div class="project-brief-info detail-item flex-grow-1" >
+            <div class="d-flex flex-grow-1" >
+              <div class="projetct-dates detail-item col-3 d-flex flex-column">
+                  <span class="content-hint">工期：</span>
+                  <div class="start-end-dates flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+                      <div>
+                        <div class="project-date-title">开始时间：</div>
+                        <div class="project-date">{{projectDetail.ProjectSTime}}</div>
+                      </div>
+                      <div>
+                        <div class="project-date-title">结束时间：</div>
+                        <div class="project-date"> {{projectDetail.ProjectETime}}</div>
+                      </div>
+                  </div>
+              </div>
+              <div class="project-brief-info detail-item flex-grow-1">
                 <span class="content-hint">简介：</span>
                 <div class="brief-info">
                     {{projectDetail.ProjectBrief}}
                 </div>
+              </div>
+                
             </div>
             <div class="d-flex flex-row flex-grow-1">
                 <div class="project-persen detail-item flex-grow-1 d-flex flex-column">
@@ -80,6 +96,13 @@ export default {
 };
 </script>
 <style scoped>
+.project-date-title{
+  font-size: 18px;
+}
+.project-date {
+  font-size: 20px;
+  margin-left: 60px;
+}
 .project-detail-container {
   margin: 4% 8%;
   color: white;
@@ -90,7 +113,7 @@ export default {
 }
 .title {
   word-break: break-all;
-  font-size: 36px;
+  font-size: 30px;
 }
 .content-hint {
   font-size: 30px;
@@ -102,6 +125,9 @@ export default {
 .detail-item:not(.project-title) {
   text-align: left;
 }
+.projetct-dates {
+  background-color: rgb(252, 132, 19);
+}
 .project-brief-info {
   font-size: 26px;
   background-color: rgb(188, 153, 253);
@@ -111,6 +137,7 @@ export default {
 }
 .brief-info {
   padding: 16px;
+  font-size: 24px;
 }
 .persen-container {
   font-size: 24px;

@@ -58,6 +58,7 @@ export default {
         Const.PROJECTS,
         {
           UIDstr: Const.getSessionStorage(Const.ACCOUNT_INFO).AccountID,
+          IsWC:1,
           PageIndex: 1,
           PageSize: 0
         },

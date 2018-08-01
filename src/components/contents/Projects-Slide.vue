@@ -4,7 +4,8 @@
             <li data-target="#projectsContainer" v-for="index in totalPage" :key="index-1" :data-slide-to="index-1" :class='{"active":(index-1)==activeIndex}'></li>
         </ol>
         <div class="carousel-inner flex-grow-1 d-flex">
-            <project-item-slide v-for="(slideProject,index) in slideProjects" v-bind:slideProject="slideProject" :key="index" :class="{'active':index==activeIndex}"></project-item-slide>
+            <project-item-slide v-for="(slideProject,index) in slideProjects" v-bind:slideProject="slideProject" :key="index" :class="{'active':index==activeIndex}">
+            </project-item-slide>
         </div>
         <a class="carousel-control-prev" href="#projectsContainer" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -53,11 +54,7 @@ export default {
     },
     slideProjects: {
       deep: true,
-      handler: function() {
-        this.$nextTick(function() {
-          $(".carousel").carousel();
-        });
-      }
+      handler: function() {}
     }
   },
   methods: {
@@ -67,6 +64,7 @@ export default {
         Const.PROJECTS,
         {
           UIDstr: this.accountInfo.AccountID,
+          IsWC: 2,
           PageIndex: 1,
           PageSize: 0
         },
@@ -91,8 +89,8 @@ export default {
 };
 </script>
 <style scoped>
-.carousel-inner{
-    padding: 50px 100px;
+.carousel-inner {
+  padding: 50px 100px;
 }
 </style>
 

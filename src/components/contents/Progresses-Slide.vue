@@ -77,6 +77,7 @@ export default {
         Const.PROJECTS,
         {
           UIDstr: this.accountInfo.AccountID,
+          IsWC: 1,
           PageIndex: 1,
           PageSize: 0
         },

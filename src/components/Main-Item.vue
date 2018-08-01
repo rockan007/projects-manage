@@ -21,21 +21,21 @@ export default {
     return {
       list: [
         {
-          title: "项目计划",
+          title: "部门计划",
           content:
-            "项目计划是根据对未来的项目决策，项目执行机构选择制定包括项目目标、工程标准、项目预算、实施程序及实施方案等活动",
+            "部门计划是根据对未来的项目决策，部门和部门内不同成员，在未来一定时期内关于行动方向、内容和方式安排的管理事件",
           icon: "icon-gerentishengjihua",
           bg: "plan-bg"
         },
         {
           title: "项目进程",
           content:
-            "项目是由一些列项目阶段所构成的一个完整过程（或者叫全过程），而各个项目阶段又是由一系列具体活动构成的一个工作过程",
+            "项目是由一些列项目阶段所构成的一个完整过程，而各个项目阶段又是由一系列具体活动构成的一个工作过程",
           icon: "icon-guochengguanli",
           bg: "progress-bg"
         },
         {
-          title: "项目详情",
+          title: "完成项目",
           content:
             "项目是一系列具有特定目标，有明确开始和终止日期，资金有限，消耗资源的活动和任务。",
           icon: "icon-chakanxiangqing",

@@ -1,5 +1,5 @@
 <template>
-    <div class="progress-slide-item  flex-grow-1 carousel-item   justify-content-center">
+    <div class="progress-slide-item  flex-grow-1 carousel-item">
         <div class="d-block w-100 h-100 d-flex justify-content-around align-items-stretch">
              <div v-for="(project,index) in slideProgress" class="col-3 progress-item d-flex flex-column" v-bind:key="index">
             <div class="progress-header">
