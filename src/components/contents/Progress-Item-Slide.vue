@@ -1,6 +1,7 @@
 <template>
-    <div class="progress-slide-item flex-grow-1 d-flex justify-content-center">
-        <div v-for="(project,index) in slideProgress" class="col-3 progress-item d-flex flex-column" v-bind:key="index">
+    <div class="progress-slide-item  flex-grow-1 carousel-item   justify-content-center">
+        <div class="d-block w-100 h-100 d-flex justify-content-around align-items-stretch">
+             <div v-for="(project,index) in slideProgress" class="col-3 progress-item d-flex flex-column" v-bind:key="index">
             <div class="progress-header">
                 <div class="progress-title">{{project.ProjectName}}</div>
                 <div class="progress-header-devider"></div>
@@ -10,10 +11,11 @@
                <div v-for="(item,index) in project.C" :key="index">
                    <div style="text-align:left">{{item.ProcessTime}}</div>
                    <div>{{item.ProcessContent}}</div>
-                    
                </div>
             </div>
         </div>
+        </div>
+       
     </div>
 </template>
 <script>
@@ -43,36 +45,36 @@ export default {
 };
 </script>
 <style scoped>
-.progress-item{
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 16px;
-    padding: 8px 16px;
+.progress-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 16px;
+  padding: 8px 16px;
 }
-.progress-header{
-    color: rgb(119, 198, 248);
-    margin-bottom: 12px;
+.progress-header {
+  color: rgb(119, 198, 248);
+  margin-bottom: 12px;
 }
-.progress-title{
-    font-size: 24px;
+.progress-title {
+  font-size: 24px;
 }
-.progress-header-devider{
-    width: 90%;
-    height: 6px;
-    margin: 0 5% 10px;
-    background-color: rgb(119, 198, 248);
-    border-radius: 3px;
+.progress-header-devider {
+  width: 90%;
+  height: 6px;
+  margin: 0 5% 10px;
+  background-color: rgb(119, 198, 248);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar {
-    width: 12px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 </style>

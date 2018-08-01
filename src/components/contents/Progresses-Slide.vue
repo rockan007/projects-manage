@@ -67,9 +67,6 @@ export default {
       deep: true,
       handler: function(newVal) {
         console.log("获取的项目进度：" + JSON.stringify(newVal));
-        this.$nextTick(function() {
-          $(".carousel").carousel();
-        });
       }
     }
   },
@@ -101,10 +98,7 @@ export default {
       this.accountInfo = Const.getSessionStorage(Const.ACCOUNT_INFO);
     },
     getSlideProgresses: function() {
-     
-      
       let sProgresses = [];
-      console.log(this.progresses.slice(0, 4));
       for (let i = 0; i < this.totalPage; i++) {
         sProgresses.push(this.progresses.slice(i * 3, (i + 1) * 3));
       }
