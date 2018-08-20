@@ -57,7 +57,7 @@
                 <label class="col-2" for="extraFile">附件<span class="required-sign">*</span></label>
                 <div class="col-5">
                      <input  type="file" name="FileAddress" class="form-control-file" id="extraFile"
-                      accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                      >
                 </div>
                
             </div>

@@ -1,6 +1,6 @@
-import $ from 'jquery/dist/jquery';
+import $ from 'jquery';
 export const Const = {
-    URL:"http://139.129.240.27:8050/",
+    URL: "http://139.129.240.27:8050/",
     MAIN_URL: "http://139.129.240.27:8050/CRMAPI/",
     LOGIN: "Login",
     PROJECTS: "Get_PPList", //项目列表
@@ -18,7 +18,13 @@ export const Const = {
             data: data,
             dataType: 'jsonp',
             success: function (response) {
-                successCB(response);
+                console.log("接口返回值：" + JSON.stringify(response));
+                if (response.ResultCode == 200) {
+                    successCB(response);
+                } else {
+                    alert(response.ResultDesc);
+                }
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -28,7 +34,7 @@ export const Const = {
     },
     postForm: function (url, data, successCB, errorCB = function () {}) {
         console.log(this.MAIN_URL + url);
-        console.log(JSON.stringify(data) );
+        console.log(JSON.stringify(data));
         $.ajax({
             type: 'POST',
             url: this.MAIN_URL + url,

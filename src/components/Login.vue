@@ -44,13 +44,12 @@ export default {
           UserName: this.account,
           PSW: this.passwords
         },
-        function(response) {
+        response => {
           console.log("登录返回值：" + JSON.stringify(response));
           this.accountInfo = response.Data_Obj;
-          //   this.$emit('accountInfo',this.accountInfo);
           Const.setSessionStorage(Const.ACCOUNT_INFO, this.accountInfo);
           this.$router.push("/home/default");
-        }.bind(this)
+        }
       );
     }
   }

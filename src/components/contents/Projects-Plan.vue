@@ -40,7 +40,7 @@ export default {
       }
     },
     periodType: function() {
-      if(this.selectPeriod.split('-').length==2){
+      if (this.selectPeriod.split("-").length == 2) {
         return;
       }
       this.getPlanList();
@@ -60,15 +60,12 @@ export default {
           Date: this.selectPeriod,
           PlanStatus: this.periodType
         },
-        function(response) {
+        response => {
           this.$emit("listPanAdd");
           console.log("获取的计划结果：" + JSON.stringify(response));
-          if (response.ResultCode == 200) {
-            this.planList = response.Data_Obj.List;
-          } else {
-            this.planList = [];
-          }
-        }.bind(this)
+          this.planList = response.Data_Obj.List;
+          console.log("长度："+this.planList.length);
+        }
       );
     },
     getPeriodType: function(periodType) {
